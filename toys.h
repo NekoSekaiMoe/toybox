@@ -72,14 +72,45 @@
 #include "lib/lsm.h"
 #include "lib/toyflags.h"
 
+// Define union global_union with fixed size to accommodate command options
+// This is a simplified approach for the CMake build system
+union global_union {
+  long long slot[64];  // Fixed-size array to hold command option arguments
+};
+
+// Define a simple structure for TT (This Tool/Thread) based on ls.c GLOBALS
+// This is a simplified approach for our CMake build system
+struct toy_globals {
+  long w;
+  long l;
+  long block_size;
+  char *color;
+  char *sort;
+  struct dirtree *files;
+  struct dirtree *singledir;
+  unsigned screen_width;
+  int nl_title;
+  char *escmore;
+  char *group_directories_first;  // Additional field that might be needed
+};
+
+// Global instance of toy_globals
+extern struct toy_globals toy_global_instance;
+
 // Get list of function prototypes for all enabled command_main() functions.
 
 #define NEWTOY(name, opts, flags) void name##_main(void);
 #define OLDTOY(name, oldname, flags) void oldname##_main(void);
 #include "generated/newtoys.h"
 #include "generated/flags.h"
-#include "generated/globals.h"
+#include "generated/options.h"  // 添加options.h
 #include "generated/tags.h"
+
+// Global variable declaration
+extern union global_union this;
+
+// Define TT as a reference to the global instance
+#define TT (toy_global_instance)
 
 // These live in main.c
 
@@ -133,7 +164,7 @@ extern char **environ, *toybox_version, toybuf[4096], libbuf[4096];
 
 #define FLAG(x) (!!(toys.optflags&FLAG_##x))  // Return 1 if flag set, 0 if not
 
-#define GLOBALS(...)
+#define GLOBALS(...)  // Keep for compatibility with source files
 #define ARRAY_LEN(array) (sizeof(array)/sizeof(*array))
 #define TAGGED_ARRAY(X, ...) {__VA_ARGS__}
 

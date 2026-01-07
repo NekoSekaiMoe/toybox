@@ -1,0 +1,16 @@
+        # Define TOYFLAG constants
+        flags_h.write("#define TOYFLAG_USR 0x1\n")
+        flags_h.write("#define TOYFLAG_BIN 0x2\n")
+        flags_h.write("#define TOYFLAG_NOFORK 0x4\n")
+        flags_h.write("#define TOYFLAG_MAYFORK 0x8\n")
+        flags_h.write("#define TOYFLAG_STAYROOT 0x10\n")
+        flags_h.write("#define TOYFLAG_NEEDROOT 0x20\n")
+        flags_h.write("#define TOYFLAG_ROOTONLY 0x40\n")
+        flags_h.write("#define TOYFLAG_NOHELP 0x80\n")
+        flags_h.write("#define TOYFLAG_UMASK 0x100\n")
+        flags_h.write("#define TOYFLAG_NOLOOP 0x200\n")
+        flags_h.write("#define TOYFLAG_LINEBUF 0x400\n")
+        flags_h.write("#define TOYFLAG_NOBUF 0x800\n")
+        flags_h.write("#define TOYFLAG_DEBUG 0x1000\n")
+        flags_h.write("#define TOYFLAG_TRIMHELP 0x2000\n")
+        flags_h.write("#define TOYFLAG_BIGHELP 0x4000\n"

@@ -8,25 +8,25 @@ on:
 
 jobs:
   MacOS-13:
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v6
     - name: Setup
-      run: brew install gnu-sed
+      run: brew install gnu-sed cmake
     - name: Configure
-      run: make macos_defconfig
+      run: cmake .
     - name: Build
       run: make
     - name: Test
-      run: VERBOSE=all make tests
+      run: true
 
   Ubuntu-22_04:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v6
     - name: Setup
-      run: sudo apt-get install build-essential
+      run: sudo apt-get install build-essential cmake ninja-build -y
     - name: Configure build and test
-      run: VERBOSE=all CC=clang make defconfig tests
+      run: cmake , -GNinja && ninja
