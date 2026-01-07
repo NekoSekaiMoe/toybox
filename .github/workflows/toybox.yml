@@ -14,7 +14,7 @@ jobs:
     - name: Setup
       run: brew install gnu-sed cmake
     - name: Configure
-      run: cmake .
+      run: cmake . -DTOYBOX_ENABLE_ARGS="mkdir;touch;ls;cp"
     - name: Build
       run: make
     - name: Test
@@ -28,4 +28,4 @@ jobs:
     - name: Setup
       run: sudo apt-get install build-essential cmake ninja-build -y
     - name: Configure build and test
-      run: cmake , -GNinja && ninja
+      run: cmake . -GNinja -DTOYBOX_ENABLE_ARGS="mkdir;touch;ls;cp" && ninja
